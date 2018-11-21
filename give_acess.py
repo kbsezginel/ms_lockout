@@ -5,20 +5,27 @@ import time
 from csv_helper import read_csv
 import MFRC522
 import RPi.GPIO as GPIO
+from rgb_blink import rgb_blink
 
 
+# DATABASE SETUP
 CSV_FILE = 'ms_lockout.csv'
 DATA = read_csv(CSV_FILE)
-print(DATA)
 user_ids = [col[0] for col in DATA]
-print(user_ids)
 access_col_idx = 3
 
-RELAY_PIN = 11  # GPIO.BOARD setting
 GPIO.setmode(GPIO.BOARD)
+
+# RELAY SETUP
+RELAY_PIN = 16  # GPIO.BOARD setting
 GPIO.setup(RELAY_PIN, GPIO.OUT)
 relay_modes = [GPIO.HIGH, GPIO.LOW]
 relay_now = 0
+
+# LED SETUP
+LED_PINS = [11, 13, 15]
+for p in LED_PINS:
+    GPIO.setup(p, GPIO.OUT)
 
 RFID_READER = MFRC522.MFRC522()
 print('Waiting to read card...')
@@ -39,6 +46,7 @@ while True:
             if DATA[user_index][access_col_idx] == 'yes':
                 print('%s has acess.' % DATA[user_index][1])
                 GPIO.output(RELAY_PIN, relay_modes[relay_now])
+                rgb_blink(LED_PINS, "green", 1)
                 time.sleep(1)
                 if relay_now == 1:
                     relay_now = 0
@@ -48,7 +56,9 @@ while True:
                     relay_now = 0
             else:
                 print('%s does not have acess.' % DATA[user_index][1])
+                rgb_blink(LED_PINS, "red", 1)
         except:
             print('User not found!')
+            rgb_blink(LED_PINS, "blue", 2)
 
         print('\nWaiting to read card...')

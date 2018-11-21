@@ -37,8 +37,10 @@ def rgb_blink(pins, color, sleep=1):
 if __name__ == '__main__':
     GPIO.setmode(GPIO.BOARD)
     PINS = [11, 13, 15]
-    for p in pins:
+    for p in PINS:
         GPIO.setup(p, GPIO.OUT)
-    pin = input("Enter color: ")
+    color = str(input("Enter color: "))
+    print(color)
+    print(COLORS[color])
     speed = input("Enter the length of blink in seconds: ")
     rgb_blink(PINS, color, float(speed))

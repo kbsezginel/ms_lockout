@@ -5,13 +5,13 @@ import RPi.GPIO as GPIO
 import time
 
 
-COLORS = {'red': [True, False, False],
-          'green': [False, True, True],
-          'blue': [False, False, True],
-          'yellow': [False, True, True],
+COLORS = {'red':    [True, False, False],
+          'green':  [False, True, False],
+          'blue':   [False, False, True],
+          'yellow': [True, True, False],
           'purple': [True, False, True],
-          'rg': [True, True, False],
-          'all': [True, True, True]}
+          'cyan':   [False, True, False],
+          'white':  [True, True, True]}
 
 
 def rgb_blink(pins, color, sleep=1):
