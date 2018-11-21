@@ -34,4 +34,4 @@ def clear_csv(csv_file):
     """Clear data input in csv field leaving only the headers (first) row."""
     headers = read_headers(csv_file)
     with open(csv_file, 'w') as f:
-        f.write(",",join(headers))
+        f.write(",".join(headers))
