@@ -63,7 +63,7 @@ python Read.py
 
 |No|Name|GPIO|Pin|
 |-:|---:|---:|--:|
-| 1| VCC|  5V|  2|
+| 1| GND| GND|  9|
 | 2| SIG|  23| 16|
 
 ### RGB LED Connections
