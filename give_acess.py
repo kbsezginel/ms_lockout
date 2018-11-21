@@ -1,6 +1,7 @@
 """
 Give access to power with RFID card read.
 """
+import time
 from csv_helper import read_csv
 import MFRC522
 import RPi.GPIO as GPIO
@@ -8,11 +9,13 @@ import RPi.GPIO as GPIO
 
 CSV_FILE = 'ms_lockout.csv'
 DATA = read_csv(CSV_FILE)
+print(DATA)
 user_ids = [col[0] for col in DATA]
+print(user_ids)
 access_col_idx = 3
 
-RELAY_PIN = 17
-GPIO.setmode(GPIO.BCM)
+RELAY_PIN = 11  # GPIO.BOARD setting
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(RELAY_PIN, GPIO.OUT)
 relay_modes = [GPIO.HIGH, GPIO.LOW]
 relay_now = 0
@@ -31,11 +34,12 @@ while True:
 
         try:
             user_index = user_ids.index(uid)
-            print('User found: %i' % user)
+            print('User found: %i' % user_index)
 
             if DATA[user_index][access_col_idx] == 'yes':
                 print('%s has acess.' % DATA[user_index][1])
                 GPIO.output(RELAY_PIN, relay_modes[relay_now])
+                time.sleep(1)
                 if relay_now == 1:
                     relay_now = 0
                 elif relay_now == 0:

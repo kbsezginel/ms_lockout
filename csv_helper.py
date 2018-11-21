@@ -26,8 +26,7 @@ def read_csv(csv_file, skip_headers=True):
 
 def append_csv(csv_file, row):
     with open(csv_file, 'a') as f:
-        writer = csv.writer(f)
-        writer.writerow(row)
+        f.write('%s' % ",".join([str(i) for i in row]))
 
 
 def clear_csv(csv_file):
