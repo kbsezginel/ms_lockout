@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Usage</title>
+  <style>
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+  }
+
+  .buttonoff {opacity: 0.6;}
+  </style>
+</head>
+
+<body>
+
+  <div class="topnav">
+    <a href=".">Home</a>
+    <a href="./control">Control</a>
+    <a class="active" href="./usage">Usage</a>
+  </div>
+
+  <div style="padding-left:16px">
+    <h2>Maker Space Control Panel</h2>
+
+  Live monitor equipment and space usage.
+
+</body>
+<script>
+  function send_button(objButton) {
+    var data = {'device': objButton.name, 'status': objButton.value};
+    serverResponse = $.post("/post", data);
+    }
+</script>
+<script src="{{url_for('static', filename='jquery-3.2.1.min.js')}}"></script>
+
+</html>
