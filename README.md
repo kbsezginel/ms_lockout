@@ -74,3 +74,10 @@ python Read.py
 | 2| Green|  27| 13|
 | 3|  Blue|  22| 15|
 | 4|   GND| GND| 14|
+
+### Buzzer
+
+|No|Name|GPIO|Pin|
+|-:|---:|---:|--:|
+| 1| GND| GND| 20|
+| 2| SIG|  25| 22|
