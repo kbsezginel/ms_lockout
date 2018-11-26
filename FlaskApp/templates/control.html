@@ -64,17 +64,17 @@
     <h2>Maker Space Control Panel</h2>
 
   <h3>Drill Press</h3>
-  <button class="button button" onclick="send_button(this)" name="drill_press" value="on" uid="1">ON</button>
-  <button class="button buttonoff" onclick="send_button(this)" name="drill_press" value="off" uid="1">OFF</button>
+  <button class="button button" onclick="send_button(this)" name="drill_press" value="1">ON</button>
+  <button class="button buttonoff" onclick="send_button(this)" name="drill_press" value="1">OFF</button>
 
   <h3>User without access</h3>
-  <button class="button button" onclick="send_button(this)" name="something" value="on" uid="2">ON</button>
-  <button class="button buttonoff" onclick="send_button(this)" name="something" value="off" uid="2">OFF</button>
+  <button class="button button" onclick="send_button(this)" name="something" value="2">ON</button>
+  <button class="button buttonoff" onclick="send_button(this)" name="something" value="2">OFF</button>
 
 </body>
 <script>
   function send_button(objButton) {
-    var data = {'device': objButton.name, 'status': objButton.value, 'uid': objButton.uid};
+    var data = {'device': objButton.name, 'uid': objButton.value};
     serverResponse = $.post("/post", data);
     }
 </script>
