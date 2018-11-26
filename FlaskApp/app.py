@@ -3,6 +3,14 @@ Pitt MakerSpace Control Panel Web Interface.
 """
 import datetime
 from flask import Flask, render_template, redirect, url_for, request
+from csv_helper import read_csv
+
+
+# DATABASE SETUP
+CSV_FILE = 'ms_lockout.csv'
+DATA = read_csv(CSV_FILE)
+USER_IDS = [col[0] for col in DATA]
+access_col_idx = 3
 
 
 app = Flask(__name__)
@@ -25,12 +33,26 @@ def usage():
 
 @app.route('/post', methods=['POST'])
 def get_post():
-    device, status = request.form['device'], request.form['status']
+    device, uid = request.form['device'], request.form['uid']
     now = datetime.datetime.now()
     time = now.strftime("%Y-%m-%d %H:%M")
-    message = 'Time: %s | Device: %s | Status: %s' % (time, device, status)
+    message = 'Time: %s | Device: %s | UID: %s' % (time, device, uid)
     print(message)
-    return message
+
+    try:
+        user_index = USER_IDS.index(uid)
+        print('User found: %i' % user_index)
+        if DATA[user_index][access_col_idx] == 'yes':
+            print('%s has acess.' % DATA[user_index][1])
+            response = 'yes'
+        else:
+            print('%s does not have acess.' % DATA[user_index][1])
+            response = 'no'
+    except:
+        print('User not found!')
+        response = 'not-found'
+
+    return response
 
 
 # route for handling the login page logic
