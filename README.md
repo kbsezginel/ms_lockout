@@ -1,5 +1,18 @@
 # ms_lockout
-Pitt MakerSpace Lockout System
+
+<p align="center">
+  <img align="center" src="https://raw.githubusercontent.com/pitt-makerspace/ms_lockout/master/docs/ms_lockout_logo.png" height="220" />
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  <img align="center" src="https://raw.githubusercontent.com/pitt-makerspace/ms_lockout/master/docs/makerspace_logo.png" width="280" />
+</p>
+
+### University of Pittsburgh makerspace lockout System.<br>
+The lockout system is designed to ensure safe usage of equipment and analyze space usage to improve user experience in the makerspace.<br>
+
+The current version of the lockout system uses Raspberry PIs to give user access to equipment in the
+space by reading user IDs. This makes sure users have proper training on the equipment. When the ID is read, the Raspberry PI asks the web server if the user has access to the equipment.<br>
+
+In this repository, required software for the lockout devices and the web server can be found with installation instructions as well as hardware setup instructions.
 
 # Setup
 - [Software](#software)
@@ -43,6 +56,16 @@ python Read.py
 ```
 
 ## Hardware
+
+The lockout device consists of:
+- Raspberry PI 3
+- Relay
+- RFID Reader
+- RGB LED
+- Plastic case with lock
+- Outlet splitter
+
+## Raspberry PI
 
 ### RFID Connections
 
